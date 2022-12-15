@@ -10,16 +10,14 @@ import {
 
 import colorWheel from '../images/colorwheel.png';
 
-export const TypeList = () => {
-    const [ types, setTypes ] = useState( [] );
+export const TypeList = ({ types, setTypes }) => {
+    // const [ types, setTypes ] = useState( [] );
     const [ type, setType ] = useState( '' );
-    const colors = [ 'success', 'info', 'warning', 'danger' ];
-    const [ colorIndex, setColorIndex ] = useState( 0 );
-    const [ color, setColor ] = useState( "success" );
+    const [ active, setActive ] = useState( false );
 
     const addType = ( type ) => {
         const typesList = types;
-        typesList.push( { id: Date.now(), name: type} );
+        typesList.push( { id: Date.now(), name: type, color: "white", selected: 0 } );
     }
 
     const handleChange = ( e ) => {
@@ -33,16 +31,21 @@ export const TypeList = () => {
         setType( '' );
     }
 
+
     const renderTypes = () => {
         return types.map( ( type ) => {
+            const id = type.id;
+            const color = type.color;
+            const name = type.name;
+            const selected = type.selected;
             return (
-                <ListGroupItem key={ type.id } color={ color } style={{ display: "flex" }}>
-                    <img style={{ height:20,  }} src={ colorWheel } alt="Color Wheel" onClick={ toggleColors }/>
+                <ListGroupItem key={ id } color={ color } style={{ display: "flex" }}>
+                    <img style={{ height:20,  }} src={ colorWheel } alt="Color Wheel" onClick={ () => toggleColors( id ) } />
                     &nbsp;
-                    { type.name }
+                    { name }
                     &nbsp;
-                    <Badge pill >1</Badge>
-                    <CloseButton style={{ marginLeft: "auto" }} onClick={ handleRemoveType } id={ type.id }/>
+                    <Badge pill >{ selected }</Badge>
+                    <CloseButton style={{ marginLeft: "auto" }} onClick={ handleRemoveType } id={ id }/>
                 </ListGroupItem> 
             )
         });
@@ -56,16 +59,23 @@ export const TypeList = () => {
         setTypes( updatedTypesList );
     }
 
-    const toggleColors = () => {
-        if( colorIndex < colors.length ) {
-            console.log('colorindex', colorIndex)
-            setColor( colors[ colorIndex + 1 ]);
-            setColorIndex( colorIndex + 1 );
-        } else {
-            console.log('colorindex', colorIndex)
-            setColorIndex( 0 );
-            setColor( colors[ 0 ] );
-        }
+    const toggleColors = ( id ) => {
+        active ? setActive( false ) : setActive( true );
+        types.map( type => {
+            if ( type.id === id ){
+                if ( type.color === "white" ) {
+                    type.color = "success";
+                } else if ( type.color === "success" ) {
+                    type.color = "info";
+                } else if ( type.color === "info" ) {
+                    type.color = "warning";
+                } else if ( type.color === "warning" ) {
+                    type.color = "danger";
+                } else if ( type.color === "danger" ) {
+                    type.color = "white";
+                }
+            }
+        });
     }
 
     return (
@@ -73,22 +83,6 @@ export const TypeList = () => {
             <ListGroupItem>
                 Types
             </ListGroupItem>
-            {/* <ListGroupItem color="success">
-                Behavior{' '}
-                <Badge pill>1</Badge>
-            </ListGroupItem>
-            <ListGroupItem color="info">
-                Symptom{' '}
-                <Badge pill>1</Badge>
-            </ListGroupItem>
-            <ListGroupItem color="warning">
-                Reprimand{' '}
-                <Badge pill>1</Badge>
-            </ListGroupItem>
-            <ListGroupItem color="danger">
-                Compliment{' '}
-                <Badge pill>1</Badge>
-            </ListGroupItem> */}
             { types.length > 0 ? renderTypes() : <ListGroupItem>Add types</ListGroupItem>}
             <InputGroup>
                 <Input 

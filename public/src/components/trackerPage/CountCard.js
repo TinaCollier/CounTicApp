@@ -1,14 +1,31 @@
 import {
     Card,
-    CardTitle,
-    CardText,
-    Button,
+    ListGroup,
+    ListGroupItem,
     CardHeader,
     CardBody,
-    CardFooter
+    CardFooter,
+    CardLink,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle
 } from 'reactstrap';
 
-function CountCard() {
+function CountCard({ types }) {
+    const listTypes = () => {
+        const currentTypes = types.map( type => {
+            console.log('types', type);
+            const name = type.name;
+            const color = type.color;
+            return (
+                <button color={ color } >{ name }</button>
+            )
+        })
+    }
+    const handleClick = e => {
+        listTypes();
+    }
     return (
         <Card
         className="my-2"
@@ -17,21 +34,16 @@ function CountCard() {
         }}
         >
         <CardHeader>
-            Header
+            Name of what is being counted
         </CardHeader>
-        <CardBody>
-            <CardTitle tag="h5">
-            Special Title Treatment
-            </CardTitle>
-            <CardText>
-            With supporting text below as a natural lead-in to additional content.
-            </CardText>
-            {/* <Button>
-            Go somewhere
-            </Button> */}
-        </CardBody>
+            <ListGroup flush>
+                <ListGroupItem>description</ListGroupItem>
+                <ListGroupItem>count</ListGroupItem>
+                <button>-</button><button>+</button>
+            </ListGroup>
         <CardFooter>
-            Footer
+            <button onClick={ handleClick }>click me</button>
+            { listTypes() }
         </CardFooter>
     </Card>
     )
