@@ -77,7 +77,7 @@ const AddCard = ({ types }) => {
                         )
                     })}
                 </Form>
-                <button onMouseOver={ () => showTypes ? setShowTypes( false ) : setShowTypes( true ) }>clickme</button>
+                <button onMouseOver={ () => showTypes ? setShowTypes( false ) : setShowTypes( true ) }>Add Card</button>
             </CardBody>
         </Card>
     )

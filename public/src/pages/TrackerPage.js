@@ -16,8 +16,8 @@ function TrackerPage() {
     }
     return (
         <div>
-            <h1>title: tracker page</h1>
-            <button onClick={ handleClick }>click me</button>
+            <h1>Main Page</h1>
+            {/* <button onClick={ handleClick }>click me</button> */}
             <Row>
                 <Col xs="3">
                 <TypeList types={ types } setTypes={ setTypes } />
