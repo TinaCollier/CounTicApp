@@ -3,13 +3,8 @@ import {
     ListGroup,
     ListGroupItem,
     CardHeader,
-    CardBody,
+    Button,
     CardFooter,
-    CardLink,
-    Dropdown,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle
 } from 'reactstrap';
 
 function CountCard({ types }) {
@@ -19,7 +14,7 @@ function CountCard({ types }) {
             const name = type.name;
             const color = type.color;
             return (
-                <button color={ color } >{ name }</button>
+                <Button color={ color } >{ name }</Button>
             )
         })
     }
@@ -27,25 +22,34 @@ function CountCard({ types }) {
         listTypes();
     }
     return (
-        <Card
-        className="my-2"
-        style={{
-            width: '18rem'
-        }}
-        >
-        <CardHeader>
-            Name of what is being counted
-        </CardHeader>
-            <ListGroup flush>
-                <ListGroupItem>description</ListGroupItem>
-                <ListGroupItem>count</ListGroupItem>
-                <button>-</button><button>+</button>
-            </ListGroup>
-        <CardFooter>
-            <button onClick={ handleClick }>click me</button>
-            { listTypes() }
-        </CardFooter>
-    </Card>
+        <div style={{ maxWidth: "500px", padding: "15px 20px"}}>
+            <Card
+            className="my-2"
+            style={{
+                width: "300px"
+
+            }}
+            >
+            <CardHeader>
+                Name of what is being counted 
+            </CardHeader>
+                <ListGroup flush>
+                    <ListGroupItem>description</ListGroupItem>
+                    <ListGroupItem>count</ListGroupItem>
+                    <div>
+                        <Button id="littleButton">-</Button>
+                        {' '}
+
+                        {' '}
+                        <Button id="littleButton">+</Button>
+                        </div>
+                </ListGroup>
+            <CardFooter>
+                <Button onClick={ handleClick }>click me</Button>
+
+            </CardFooter>
+        </Card>
+    </div>
     )
 }
 

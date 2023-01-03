@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { 
+    useState,
+    useEffect 
+} from 'react';
 import { 
     Card,
     CardHeader,
@@ -7,41 +10,63 @@ import {
     FormGroup,
     Input,
     Label,
-    Form
+    Form,
+    Button
 } from 'reactstrap';
 
-const AddCard = ({ types }) => {
+const AddCard = ({ types, addCardVisible, setAddCardVisible, allCards, setAllCards }) => {
     const [ color, setColor ] = useState( "white" );
-    const [ showTypes, setShowTypes ] = useState( false );
-    const radioTypes = e => {
-        console.log('radiotypes', types)
-        return types.forEach( type => {
-            const id = type.id;
-            const name = type.name;
-            console.log('type', name)
-            return (
-                <p key={id}>{name}</p>
-            )
-        });
-    }
+    const [ date, setDate ] = useState( '' );
+    const [ cardName, setCardName ] = useState( '' );
+    const [ cardDescription, setCardDescription ] = useState( '' );
+    const [ type, setType ] = useState( '' );
 
-    const handleOnChangeValue = e => {
-        setColor( e.target.value );
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(date, cardName, cardDescription, type)
+        const newEvent = {
+            id: Date.now(),
+            date: date,
+            cardName: cardName,
+            cardDescription: cardDescription,
+            type: type
+        }
+        const collection = [ ...allCards, newEvent ];
+        setAddCardVisible( false );
+        setAllCards( collection );
     }
-
+    
     return (
+        <div style={{
+            maxWidth: "450px", 
+            padding: "15px 20px" 
+            }}>
         <Card 
-        onMouseOver={ () => showTypes ? setShowTypes( false ) : setShowTypes( true ) }
-        color={ color }
         >
             <CardHeader>
                 Add Card Component
             </CardHeader>
             <CardBody>
-                <Form>
+                <Form onSubmit={ handleSubmit }>
+                    <FormGroup >
+                        <Label for="exampleDate">
+                        Date
+                        </Label>
+                        <Input
+                        id="exampleDate"
+                        name="dateCardCreated"
+                        placeholder="date"
+                        type="date"
+                        onChange={ ( e ) => setDate( e.target.value ) }
+                        />
+                    </FormGroup>
                     <FormGroup>
                         <Input
-                            placeholder="Name"
+                        placeholder="Name"
+                        type="textarea"
+                        name="text"
+                        onChange={ ( e ) => { setCardName( e.target.value ) } }
                         />
                     </FormGroup>
                     <FormGroup>
@@ -49,37 +74,39 @@ const AddCard = ({ types }) => {
                         placeholder="Description"
                         type="textarea"
                         name="text"
+                        onChange={ ( e ) => setCardDescription( e.target.value )}
                         />
                     </FormGroup>
-                    <FormGroup><legend>Select Type:</legend></FormGroup>
+                    <FormGroup>
+                        <Label for="type">
+                            Type
+                        </Label>
+                        <Input 
+                            id="typeSelect"
+                            name="select"
+                            type="select"
+                            placeholder="Select Type"
 
+                            onChange={ ( e ) => setType( e.target.value ) }
+                        >
+                            <option>Select Type</option>
                     { types.map( type => {
                         const name = type.name;
                         const id = type.id;
-                        const typeColor = type.color;
-
                         return (
-                            <FormGroup
-                            key={ id }
-                            check
-                            inline
-                            >
-                                <Input 
-                                name="type"
-                                type="radio" 
-                                value={ typeColor }
-                                onChange={ handleOnChangeValue }
-                                />
-                                <Label check>
-                                { name }
-                                </Label>
-                            </FormGroup>
+                            <option key={ id }>{ name }</option>
                         )
                     })}
+                    </Input>
+                    </FormGroup>
+                    <Button type="submit" disabled={ !date || !cardName || !cardDescription || !type }>
+                        Submit
+                    </Button>
                 </Form>
-                <button onMouseOver={ () => showTypes ? setShowTypes( false ) : setShowTypes( true ) }>Add Card</button>
+
             </CardBody>
         </Card>
+        </div>
     )
 }
 

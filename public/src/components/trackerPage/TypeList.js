@@ -6,6 +6,7 @@ import {
     InputGroup,
     Input,
     CloseButton,
+    Button
 } from 'reactstrap';
 
 import colorWheel from '../images/colorwheel.png';
@@ -34,6 +35,7 @@ export const TypeList = ({ types, setTypes }) => {
 
     const renderTypes = () => {
         return types.map( ( type ) => {
+            if( type.name ){
             const id = type.id;
             const color = type.color;
             const name = type.name;
@@ -47,7 +49,7 @@ export const TypeList = ({ types, setTypes }) => {
                     <Badge pill >{ selected }</Badge>
                     <CloseButton style={{ marginLeft: "auto" }} onClick={ handleRemoveType } id={ id }/>
                 </ListGroupItem> 
-            )
+            )}
         });
     }
 
@@ -79,21 +81,24 @@ export const TypeList = ({ types, setTypes }) => {
     }
 
     return (
-        <ListGroup flush>
+        <div style={{ maxWidth: "500px", padding: "15px 20px" }}>
+        <ListGroup flush style={{ maxWidth: "400px"}}>
             <ListGroupItem>
                 Types
             </ListGroupItem>
-            { types.length > 0 ? renderTypes() : <ListGroupItem>Add types</ListGroupItem>}
             <InputGroup>
                 <Input 
                 type="text"
                 value={ type }
                 onChange={ handleChange }
                 />
-                <button onClick={ handleClick }>
+                <Button onClick={ handleClick } disabled={ !type }>
                     add type
-                </button>
+                </Button>
             </InputGroup>
+            { types.length > 0 ? renderTypes() : <ListGroupItem>Add types</ListGroupItem>}
+
         </ListGroup>
+        </div>
     )
 }
