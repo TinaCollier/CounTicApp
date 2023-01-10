@@ -20,7 +20,7 @@ const AddCard = ({ types, addCardVisible, setAddCardVisible, allCards, setAllCar
     const [ cardName, setCardName ] = useState( '' );
     const [ cardDescription, setCardDescription ] = useState( '' );
     const [ type, setType ] = useState( '' );
-
+    const [ log, setLog ] = useState( [] );
     
     const handleSubmit = e => {
         e.preventDefault();
@@ -30,7 +30,8 @@ const AddCard = ({ types, addCardVisible, setAddCardVisible, allCards, setAllCar
             date: date,
             cardName: cardName,
             cardDescription: cardDescription,
-            type: type
+            type: type,
+            log: log
         }
         const collection = [ ...allCards, newEvent ];
         setAddCardVisible( false );

@@ -12,7 +12,7 @@ body {
 }
 
 
-#mainPage {
+#tracker-page {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
@@ -30,6 +30,14 @@ body {
 
 #littleButton {
   width: 50px;
+}
+
+#create-account-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  background-color: grey
 }
 
 .App-logo {
@@ -53,4 +61,29 @@ body {
   #cardArea {
     grid-area: 2 / 1 / 6 / 6; 
   }
+}
+
+#home-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+  
+#home-main { 
+  grid-area: 1 / 1 / 6 / 5; 
+  background-color: aquamarine;
+}
+#home-image { 
+  grid-area: 1 / 5 / 6 / 7; 
+  background-color: pink;
+  background-image: url('./components/images/classroomVertical1.jpg');
+  background-size: cover;
+
+}
+#home-message { 
+  grid-area: 2 / 2 / 5 / 4; 
+  background-color: yellow;
 }

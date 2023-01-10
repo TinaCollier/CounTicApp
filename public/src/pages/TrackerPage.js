@@ -6,19 +6,20 @@ import {
     CardGroup,
     Button
 } from 'reactstrap';
-import CountCard from "../components/trackerPage/CountCard";
 import AddCard from './AddCard';
+import { DisplayCards } from '../components/DisplayCards';
 
 function TrackerPage() {
     const [ addCardVisible, setAddCardVisible ] = useState( false );
     const [ types, setTypes ] = useState( [] );
     const [ allCards, setAllCards ] = useState( [] );
     const handleClick = e => {
-        console.log('trackerpage', types)
+        console.log('trackerpage', allCards[0])
     }
     return (
-        <div id="mainPage">
+        <div id="tracker-page">
             <div id="sidebar">
+                <Button onClick={handleClick}>types</Button>
                 <Button onClick={() => console.log(allCards)}>push me</Button>
                 <TypeList types={ types } setTypes={ setTypes } />
                 { addCardVisible ? 
@@ -30,15 +31,7 @@ function TrackerPage() {
                 }
             </div>
             <div id="cardArea">
-                <CardGroup style={{ padding: "15px 15px" }}>
-                    <CountCard types={ types } setTypes={ setTypes } />
-                    <CountCard types={ types } setTypes={ setTypes } />
-                    <CountCard types={ types } setTypes={ setTypes } />
-                    <CountCard types={ types } setTypes={ setTypes } />
-                    <CountCard types={ types } setTypes={ setTypes } />
-                    <CountCard types={ types } setTypes={ setTypes } />
-                </CardGroup>                    
-
+                <DisplayCards allCards={ allCards } types={ types }/>                   
             </div>
         </div>
     )
