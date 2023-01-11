@@ -19,8 +19,8 @@ function TrackerPage() {
     return (
         <div id="tracker-page">
             <div id="sidebar">
-                <Button onClick={handleClick}>types</Button>
-                <Button onClick={() => console.log(allCards)}>push me</Button>
+                <Button onClick={handleClick}>all cards [0]</Button>
+                <Button onClick={() => console.log(allCards)}>all cards</Button>
                 <TypeList types={ types } setTypes={ setTypes } />
                 { addCardVisible ? 
                 <AddCard setAddCardVisible={ setAddCardVisible } types={ types } allCards={ allCards } setAllCards={ setAllCards } /> 

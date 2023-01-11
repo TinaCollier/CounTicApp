@@ -30,7 +30,7 @@ function NavBar(props) {
 
   return (
     <div>
-      <Navbar light>
+      <Navbar dark>
         <NavbarBrand href="/" className="me-auto">
             <img
             alt="logo"

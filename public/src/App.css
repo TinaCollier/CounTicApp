@@ -4,7 +4,7 @@ body {
 }
 
 .navbar {
-  background-color: #246a73;
+  background-color: #293241;
 }
 
 .card {
@@ -36,8 +36,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 450px;
-  background-color: grey
+  height: 100vh;
+  background-color: #3d5a80;
 }
 
 .App-logo {
@@ -74,16 +74,16 @@ body {
   
 #home-main { 
   grid-area: 1 / 1 / 6 / 5; 
-  background-color: aquamarine;
+  background-color: #98c1d9;
 }
 #home-image { 
   grid-area: 1 / 5 / 6 / 7; 
-  background-color: pink;
+  background-color: #ee6c4d;
   background-image: url('./components/images/classroomVertical1.jpg');
   background-size: cover;
 
 }
 #home-message { 
   grid-area: 2 / 2 / 5 / 4; 
-  background-color: yellow;
+  background-color: #3d5a80;
 }

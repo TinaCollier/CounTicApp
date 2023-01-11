@@ -2,20 +2,21 @@ import {
     useContext
 } from 'react';
 import UserContext from "../context/UserContext";
+import { Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+import { HomeMessage } from '../components/HomeMessage';
+import { WelcomeMessage } from '../components/WelcomeMessage';
 
 function HomePage() {
     const { id, name, email, password, eventHistory, loggedIn } = useContext( UserContext );
+
     return (
         <div id="home-container">
             <div id="home-main">
             </div>
-            <div id="home-message">
-                    <h1>some text</h1>
-                    <br />
-                    <p>some more text</p>
-                    <button onClick={ () => console.log( id, name, email, password, eventHistory, loggedIn )}>app context</button>
-                </div>
-            <div id="home-image"></div>
+            { loggedIn ? <WelcomeMessage /> : <HomeMessage />}
+            <div id="home-image">
+            </div>
         </div>
     )
 };
