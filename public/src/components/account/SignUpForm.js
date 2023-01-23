@@ -19,6 +19,7 @@ import {
 } from './Validation';
 import UserContext from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
+import { Users } from '../../context/Users';
 
 export const SignUpForm = () => {
     const { id, setId, name, setName, setPassword, setEmail, setEventHistory, setLoggedIn } = useContext( UserContext );
@@ -28,36 +29,33 @@ export const SignUpForm = () => {
     const [ signUpPassword, setSignUpPassword ] = useState( '' );
     const [ signUpConfirmPassword, setSignUpConfirmPassword ] = useState( '' );
     const [ formCompleted, setFormCompleted ] = useState( false );
-    const [ submitted, setSubmitted ] = useState( false );
     const navigate = useNavigate();
 
     const handleEmail = e => {
         setSignUpEmail( e.target.value );
-        setSubmitted( false );
     }
     const handleUsername = e => {
         setSignUpUsername( e.target.value );
-        setSubmitted( false );
     }
     const handlePassword = e => {
         setSignUpPassword( e.target.value );
-        setSubmitted( false );
     }
     const handleConfirmPassword = e => {
         setSignUpConfirmPassword( e.target.value );
-        setSubmitted( false );
     }
 
     const handleSubmit = e => {
         e.preventDefault();
         console.log(signUpEmail)
-        setId( signUpId );
-        setName( signUpUsername );
-        setEmail( signUpEmail );
-        setPassword( signUpPassword );
-        setEventHistory( [] );
-        setLoggedIn( true );
-        navigate( '/' );
+        if ( signUpEmail !== Users.find( signUpEmail ) ) {
+            setId( signUpId );
+            setName( signUpUsername );
+            setEmail( signUpEmail );
+            setPassword( signUpPassword );
+            setEventHistory( [] );
+            setLoggedIn( true );
+            navigate( '/' );
+        }
     }
 
     const checkPasswords = signUpConfirmPassword.length > 0 ? confirmPasswords( signUpPassword, signUpConfirmPassword ) : false;
@@ -66,13 +64,13 @@ export const SignUpForm = () => {
         <Form onSubmit={ handleSubmit } >
             <FormGroup>
                 <Label
-                for="exampleSignUpEmail"
+                for="signUpEmail"
                 hidden
                 >
                 Username
                 </Label>
                 <Input
-                id="exampleSignUpEmail"
+                id="signUpEmail"
                 name="email"
                 placeholder="Email"
                 type="email"
@@ -103,13 +101,13 @@ export const SignUpForm = () => {
             {' '}
             <FormGroup>
                 <Label
-                for="examplePassword"
+                for="signUpPassword"
                 hidden
                 >
                 Password
                 </Label>
                 <Input
-                id="examplePassword"
+                id="signUpPassword"
                 name="password"
                 placeholder="Password"
                 type="password"
